@@ -29,12 +29,14 @@
 		<nav>
 			<ul>
 			{% for looppage in site.pages %}
-				{% if page.layout == "blog-item" and looppage.title == "blog posts" %}
-					{% assign blogpage = true %}
+				{% if looppage.title %}
+					{% if page.layout == "blog-item" and looppage.title == "blog posts" %}
+						{% assign blogpage = true %}
+					{% endif %}
+					<li{% if looppage.url == page.url or blogpage %} class="active"{% endif %}>
+						<a href="{{ site.baseurl }}{{ looppage.url }}">{{ looppage.title }} {% if looppage.url == page.url or blogpage %} &laquo; {% endif %}</a>
+					</li>
 				{% endif %}
-				<li{% if looppage.url == page.url or blogpage %} class="active"{% endif %}>
-					<a href="{{ site.baseurl }}{{ looppage.url }}">{{ looppage.title }} {% if looppage.url == page.url or blogpage %} &laquo; {% endif %}</a>
-				</li>
 			{% endfor %}
 			</ul>
 		</nav>
