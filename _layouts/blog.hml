@@ -1,0 +1,30 @@
+---
+layout: header
+---
+
+<article>
+	{{ content }}
+	{% assign sorted = site.posts | sort: 'date' %}
+	{% assign sortedposts = sorted | reverse %}
+	{% for post in sorted %}
+
+			<section class="post">
+				<!--<header class="post-header">  -->
+					<h2 class="post-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h2>
+					<div style="float:right">{{ post.date | date_to_string }}</div>
+					<p class="post-meta">
+						Author: <a href="#" class="post-author">{{ post.author }}</a> &ndash;
+						{% for tag in page.tags %}
+							<a href="#{{ tag }}" class="post-tag">{{ tag }}</a>
+						{% endfor %}
+					</p>
+				<!-- </header> -->
+				<div class="post-description">
+					<p> {{ post.description }} </p>
+					<!-- { % if post.meta['image'] % }
+						<img class="post-image" src="{{ base_url }}/assets/images/{{ post.meta['image'] }}"/>
+					{ % endif % } -->
+				</div>
+			</section>
+	{% endfor %}
+</article>
